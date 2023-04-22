@@ -1,4 +1,4 @@
-const gameInput = { gameName: '', publisherName: '' };
+const gameInput = { gameName: 'ShogiGame', publisherName: 'ParodyStudios' };
 //loading scripts
 $.getScript(
 
