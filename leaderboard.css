@@ -1,0 +1,193 @@
+/* All margins and padding must be zero for the canvas to fill the screen.  */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+#playMore {
+  display: none;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+  cursor: pointer;
+  -webkit-animation: pulse 1.5s infinite;
+  font-family: Josefin Sans, sans-serif;
+}
+
+#div-gpt-ad-1 {
+    display:flex;
+    justify-content:center;
+    position: relative;
+    /* width: 100%; */
+    transform: scale(0.8);
+    border: 6px solid rgb(255, 255, 255, 1);
+    border-radius: 12px;
+}
+
+.gameoverPage {
+  background: url("bgPattern.png") no-repeat,linear-gradient(360deg, rgba(2,0,36,1) 0%, rgba(235,51,82,1) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  color: white;
+}
+
+.user-score{
+  display: flex;
+  padding: 5px 0px;
+  width: 90%;
+  justify-content: center;
+}
+
+.gameoverText {
+  margin-top: 10px;
+  font-size: 1.8rem;
+  color: #fff;
+  text-align: center;
+}
+
+.currentScore {
+  color: #fff;
+  text-align: center;
+}
+
+.bestScore {
+  margin: 0 10px;
+  padding: 0 10px;
+  color: #fff;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  text-align: center;
+}
+
+.yourRank{
+  text-align: center;
+}
+
+
+p {
+  margin: 0;
+  line-height: 1 !important;
+}
+
+u{
+    color: #fff;
+}
+
+
+.gameOverDiv{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    /* margin-bottom: 10px; */
+    width: 100%;
+}
+
+
+.replay__btn{
+    padding: 10px;
+    color:#fff;
+    border: 1px solid #fff;
+    border-radius: 10px;
+}
+
+hr{
+  width: 80%;
+  opacity: 0.35;
+  margin: 8px 0;
+}
+
+.lb-footer{
+  position: fixed;
+  bottom: 5px;
+  width: 100%;
+  text-align: center;
+}
+
+.lb-footer-content{
+  display: inline-flex;
+}
+
+.glance_logo{
+  height: 20px;
+}
+
+#left{
+  width: 100%;
+  overflow: auto;
+  margin-bottom: 15%;
+
+}
+@media screen and (orientation:landscape) {
+  #left{
+    margin: 10px;
+    position: absolute;
+    top: auto;
+    left: 1%;
+    width: 50%;
+    height: 85%;
+    overflow: auto;
+  }
+  #div-gpt-ad-1 {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+  }
+  .gameoverPage{
+    position: absolute;
+    overflow: auto;
+  }
+  .leaderBoard{
+    overflow: hidden;
+  }
+}
+
+/* LB Card Start*/
+
+.leaderBoard{
+  height: auto;
+  overflow: auto;
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.leaderBoardData{
+  display: flex;
+  width: 100%;
+  margin-bottom: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.lb-details{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 30px;
+  /* background: rgba(210, 255, 213, 0.3); */
+  background: rgba(234, 120, 120, 0.76);
+  width: 75%;
+}
+
+.lb-details .lb-gamepoints{
+  margin-left: 0.2rem;
+  margin-right: 1.2rem;
+}
+
+/* .lb-details .lb-dash{
+  margin: 0 2.2rem;
+} */
+.yourRow .lb-details{
+  background: rgba(15, 167, 15, 0.86);
+}
+.lb-icon{
+  width: 21px;
+  height: 21px;
+  margin: 5px;
+  padding: 7px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+/* LB Card End*/
