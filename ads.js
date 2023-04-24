@@ -103,10 +103,19 @@ function bannerCallbacks(obj) {
     obj.adInstance?.registerCallback('onAdLoadSucceed', (data) => {
         console.log('onAdLoadSucceeded CALLBACK', data);
 
+        // For Start Ads
+
         if (obj.adUnitName === LBBannerObj.adUnitName) {
             $("#div-gpt-ad-1").css("display", "flex")
             $(".gameOverDiv").css("margin-top", "0px");
         }
+
+        if (obj.adUnitName === StickyObj.adUnitName) {
+            console.log("Sticky Loaded");
+            $("#div-gpt-ad-1").css("display", "flex")
+            $(".gameOverDiv").css("margin-down", "0px");
+        }
+
     });
 
     obj.adInstance?.registerCallback('onAdLoadFailed', (data) => {
@@ -116,12 +125,22 @@ function bannerCallbacks(obj) {
         if (obj.adUnitName === LBBannerObj.adUnitName) {
             $("#div-gpt-ad-1").css("display", "none")
             $(".gameOverDiv").css("margin-top", "100px");
+        }
 
+        if (obj.adUnitName === StickyObj.adUnitName) {
+            console.log("Sticky failed");
+            $("#div-gpt-ad-1").css("display", "none")
+            $(".gameOverDiv").css("margin-down", "100px");
         }
     });
 
     obj.adInstance?.registerCallback('onAdDisplayed', (data) => {
         console.log('onAdDisplayed  CALLBACK', data);
+
+        if (obj.adUnitName === StickyObj.adUnitName) 
+        {
+            console.log("Sticky shown");
+        }
     });
 
 
@@ -231,7 +250,6 @@ function replayEvent() {
 }
 
 function rewardEvent() {
-    print("Here I am");
     _triggerReason = 'reward'
     if (!is_rewarded_noFill) {
         window.GlanceGamingAdInterface.showRewarededAd(rewardInstance);
