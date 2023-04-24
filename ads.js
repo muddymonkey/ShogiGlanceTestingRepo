@@ -86,9 +86,9 @@ const replayObj = {
 }
 const rewardObj = {
     adUnitName: "",
-    placementName: "FsRewarded",
-    pageName: '',
-    categoryName: '',
+    placementName: "Test_Rewarded",
+    pageName: 'PublisherName_GameName',
+    categoryName: 'google',
     containerID: '',
     height: '',
     width: '',
@@ -232,6 +232,7 @@ function replayEvent() {
 }
 
 function rewardEvent() {
+    print("Here I am");
     _triggerReason = 'reward'
     if (!is_rewarded_noFill) {
         window.GlanceGamingAdInterface.showRewarededAd(rewardInstance);
