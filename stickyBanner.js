@@ -24,7 +24,20 @@ function refreshStickyBannerAd() {
 			StickyBannerInstance.destroyAd();
 		}
 		
-		StickyBannerInstance =  window.GlanceGamingAdInterface.showStickyBannerAd(StickyObj,bannerCallbacks);
+const testSticky = {
+    adUnitName: "",
+    pageName: 'PublisherName_GameName',               //Game Name
+    categoryName: 'google',           //Publisher Name
+    placementName: 'Test_Banner',
+    containerID: "div-gpt-ad-2",            //Div Id for banner
+    height: 50,
+    width: 320,
+    xc: '12.0',
+    yc: '3.0',
+    gpid: gpID,
+}
+        
+		StickyBannerInstance =  window.GlanceGamingAdInterface.showStickyBannerAd(testSticky,bannerCallbacks);
     }, 30000);
 }
 

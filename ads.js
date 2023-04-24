@@ -39,10 +39,10 @@ const LPMercObj = {
 }
 const StickyObj = {
     adUnitName: "",
-    pageName: 'PublisherName_GameName',               //Game Name
-    categoryName: 'google',           //Publisher Name
-    placementName: 'Test_Banner',
-    containerID: "div-gpt-ad-2",            //Div Id for banner
+    pageName: '',               //Game Name
+    categoryName: '',           //Publisher Name
+    placementName: '',
+    containerID: "",            //Div Id for banner
     height: 50,
     width: 320,
     xc: '12.0',
@@ -145,9 +145,28 @@ function bannerCallbacks(obj) {
 
 
 }
+
+
+function showbanner()
+{
+    const StickObject = {
+        adUnitName: "",
+        pageName: 'PublisherName_GameName',               //Game Name
+        categoryName: 'google',           //Publisher Name
+        placementName: 'Test_Banner',
+        containerID: "div-gpt-ad-2",            //Div Id for banner
+        height: 50,
+        width: 320,
+        xc: '12.0',
+        yc: '3.0',
+        gpid: gpID,
+    }
+
+    StickyBannerInstance = window.GlanceGamingAdInterface.showBannerAd(StickObject,bannerCallbacks);
+}
+
 // rewarded ad callbacks
 function rewardedCallbacks(obj) {
-
 
 
     obj.adInstance?.registerCallback('onAdLoadSucceed', (data) => {
