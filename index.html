@@ -6,11 +6,13 @@
     <title>Unity WebGL Player | Shogi</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
-    <script type="text/javascript" src="./ads.js"></script>
     <script src="jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="./loadingPage.js"></script>
+    <link rel="stylesheet" href="./loadingPage.css">
+    <script type="text/javascript" src="./ads.js"></script>
     <script type="text/javascript" src="./stickyBanner.js"></script> 
     <link rel="stylesheet" href="./stickyBanner.css">
-    <script>
+    <!-- <script>
       const gameInput = {
         gameName: 'ShogiGame', 
         publisherName: 'ParodyStudios',
@@ -20,12 +22,16 @@
 
       }
       function failCb(reason) {
-        
+
       }
       window.GlanceGamingAdInterface.setupLibrary(gameInput, successCb, failCb);
-    </script>
+    </script> -->
   </head>
   <body>
+    <script>
+      // Showing up GLANCE Loading Bar..
+      addLoader();
+    </script>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
       <div id="unity-loading-bar">
@@ -122,6 +128,8 @@
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
+          // Updating GLANCE progress bar over here...
+          progressBar(100 * progress);
         }).then((unityInstance) => {
           loadingBar.style.display = "none";
           fullscreenButton.onclick = () => {
