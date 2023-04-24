@@ -39,10 +39,10 @@ const LPMercObj = {
 }
 const StickyObj = {
     adUnitName: "",
-    pageName: '',               //Game Name
-    categoryName: '',           //Publisher Name
-    placementName: 'ingame',
-    containerID: "banner-ad",            //Div Id for banner
+    pageName: 'PublisherName_GameName',               //Game Name
+    categoryName: 'google',           //Publisher Name
+    placementName: 'Test_Banner',
+    containerID: "div-gpt-ad-2",            //Div Id for banner
     height: 50,
     width: 320,
     xc: '12.0',
@@ -69,7 +69,6 @@ function successCb() {
 
 }
 function failCb(reason) { }
-
 
 
 const replayObj = {
