@@ -87,7 +87,7 @@ const replayObj = {
 const rewardObj = {
     adUnitName: "",
     placementName: "Test_Rewarded",
-    pageName: 'PublisherName_GameName',
+    pageName: 'ParodyStudios_ShogiGame',
     categoryName: 'google',
     containerID: '',
     height: '',
@@ -114,7 +114,7 @@ function bannerCallbacks(obj) {
         if (obj.adUnitName === StickyObj.adUnitName) {
             console.log("Sticky Loaded");
             $("#div-gpt-ad-1").css("display", "flex")
-            $(".gameOverDiv").css("margin-down", "0px");
+            $(".gameOverDiv").css("margin-top", "0px");
         }
 
     });
@@ -131,7 +131,7 @@ function bannerCallbacks(obj) {
         if (obj.adUnitName === StickyObj.adUnitName) {
             console.log("Sticky failed");
             $("#div-gpt-ad-1").css("display", "none")
-            $(".gameOverDiv").css("margin-down", "100px");
+            $(".gameOverDiv").css("margin-top", "100px");
         }
     });
 
@@ -171,6 +171,7 @@ function rewardedCallbacks(obj) {
             is_rewarded_noFill = false
         }
 
+        unityInstanceMain.SendMessage("JSToUnityBridge", "ReciveCallBack", "rewardedLoadSuccess");
 
     });
 
@@ -183,13 +184,15 @@ function rewardedCallbacks(obj) {
             is_rewarded_noFill = true
         }
 
+        unityInstanceMain.SendMessage("JSToUnityBridge", "ReciveCallBack", "rewardedLoadFailed");
+
 
     });
 
     obj.adInstance?.registerCallback('onAdDisplayed', (data) => {
         console.log('onAdDisplayed Rewarded CALLBACK', data);
 
-
+        unityInstanceMain.SendMessage("JSToUnityBridge", "ReciveCallBack", "rewardedShowSuccess");
     });
 
 
@@ -204,6 +207,7 @@ function rewardedCallbacks(obj) {
         isRewardGranted = false
         isRewardedAdClosedByUser = false
 
+        unityInstanceMain.SendMessage("JSToUnityBridge", "ReciveCallBack", "rewardedClosed");
 
 
     });
@@ -214,6 +218,8 @@ function rewardedCallbacks(obj) {
 
     obj.adInstance?.registerCallback('onRewardsUnlocked', (data) => {
         console.log('onRewardsUnlocked Rewarded CALLBACK', data);
+
+        unityInstanceMain.SendMessage("JSToUnityBridge", "ReciveCallBack", "rewardedCompleted");
 
         if (obj.adUnitName === rewardObj.adUnitName) {
             isRewardGranted = true
@@ -271,6 +277,9 @@ function rewardEvent() {
 
 }
 
+function rewardedFunction(){
+    rewardInstance=window.GlanceGamingAdInterface.loadRewardedAd(rewardObj, rewardedCallbacks);
+}
 
 
 function showGame() {
