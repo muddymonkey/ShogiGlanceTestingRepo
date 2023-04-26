@@ -13,6 +13,9 @@
     <script type="text/javascript" src="./stickyBanner.js"></script> 
     <link rel="stylesheet" href="./stickyBanner.css">
     <script type="text/javascript" src="./ads.js"></script>
+    <script>
+      var unityInstanceMain = null;
+    </script>
   </head>
   <body>
     <script>
@@ -118,6 +121,7 @@
           // Updating GLANCE progress bar over here...
           progressBar(100 * progress);
         }).then((unityInstance) => {
+          unityInstanceMain = unityInstance;
           loadingBar.style.display = "none";
           fullscreenButton.onclick = () => {
             unityInstance.SetFullscreen(1);

@@ -24,6 +24,7 @@ var is_replay_noFill = false
 var is_rewarded_noFill = false
 var isRewardGranted = false
 var isRewardedAdClosedByUser = false
+
 // Objects for different ad format.
 const LPMercObj = {
     adUnitName: "",
@@ -37,18 +38,18 @@ const LPMercObj = {
     yc: '3.0',
     gpid: gpID,
 }
-const StickyObj = {
-    adUnitName: "",
-    pageName: '',               //Game Name
-    categoryName: '',           //Publisher Name
-    placementName: '',
-    containerID: "",            //Div Id for banner
-    height: 50,
-    width: 320,
-    xc: '12.0',
-    yc: '3.0',
-    gpid: gpID,
-}
+// const StickyObj = {
+//     adUnitName: "",
+//     pageName: '',               //Game Name
+//     categoryName: '',           //Publisher Name
+//     placementName: '',
+//     containerID: "",            //Div Id for banner
+//     height: 50,
+//     width: 320,
+//     xc: '12.0',
+//     yc: '3.0',
+//     gpid: gpID,
+// }
 
 const LBBannerObj = {
     adUnitName: "",
@@ -110,12 +111,6 @@ function bannerCallbacks(obj) {
             $(".gameOverDiv").css("margin-top", "0px");
         }
 
-        if (obj.adUnitName === StickyObj.adUnitName) {
-            console.log("Sticky Loaded");
-            $("#div-gpt-ad-1").css("display", "flex")
-            $(".gameOverDiv").css("margin-down", "0px");
-        }
-
     });
 
     obj.adInstance?.registerCallback('onAdLoadFailed', (data) => {
@@ -126,49 +121,48 @@ function bannerCallbacks(obj) {
             $("#div-gpt-ad-1").css("display", "none")
             $(".gameOverDiv").css("margin-top", "100px");
         }
-
-        if (obj.adUnitName === StickyObj.adUnitName) {
-            console.log("Sticky failed");
-            $("#div-gpt-ad-1").css("display", "none")
-            $(".gameOverDiv").css("margin-down", "100px");
-        }
     });
 
     obj.adInstance?.registerCallback('onAdDisplayed', (data) => {
         console.log('onAdDisplayed  CALLBACK', data);
 
-        if (obj.adUnitName === StickyObj.adUnitName) 
-        {
-            console.log("Sticky shown");
-        }
     });
 
 
 }
 
+const BannerStickyObj = {
+    adUnitName: "",
+    pageName: 'PublisherName_GameName',               //Game Name
+    categoryName: 'google',           //Publisher Name
+    placementName: 'Test_Banner',
+    containerID: "div-gpt-ad-2",            //Div Id for banner
+    height: 50,
+    width: 320,
+    xc: '12.0',
+    yc: '3.0',
+    gpid: gpID,
+}
 
-function showbanner()
+function callForStickyAds()
 {
-    const StickObject = {
-        adUnitName: "",
-        pageName: 'PublisherName_GameName',               //Game Name
-        categoryName: 'google',           //Publisher Name
-        placementName: 'Test_Banner',
-        containerID: "div-gpt-ad-2",            //Div Id for banner
-        height: 50,
-        width: 320,
-        xc: '12.0',
-        yc: '3.0',
-        gpid: gpID,
-    }
 
-    StickyBannerInstance = window.GlanceGamingAdInterface.showBannerAd(StickObject,bannerCallbacks);
+    console.log("Called after 2 secs of game load");
+
+
+    refreshStickyBannerAd(); 
+    StickyBannerInstance=window?.GlanceGamingAdInterface?.showStickyBannerAd(BannerStickyObj, bannerCallbacks);
 }
 
 // rewarded ad callbacks
 function rewardedCallbacks(obj) {
 
+        // var gameObjectName = "MyGameObject";
+        // var methodName = "MyMethod";
+        // var message = "Hello from JavaScript!";
 
+        // unityInstance.SendMessage(gameObjectName, methodName, message);
+        
     obj.adInstance?.registerCallback('onAdLoadSucceed', (data) => {
         console.log('onAdLoadSucceeded Rewarded CALLBACK', data);
         if (obj.adUnitName === replayObj.adUnitName) {
