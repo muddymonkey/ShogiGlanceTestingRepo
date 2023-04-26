@@ -28,7 +28,7 @@ var isRewardedAdClosedByUser = false
 // Objects for different ad format.
 const LPMercObj = {
     adUnitName: "",
-    pageName: 'PublisherName_GameName',               //Game Name
+    pageName: 'ParodyStudios_ShogiGame',               //Game Name
     categoryName: 'google',           //Publisher Name
     placementName: 'Test_Banner',
     containerID: "div-gpt-ad-2",            //Div Id for banner
@@ -38,18 +38,18 @@ const LPMercObj = {
     yc: '3.0',
     gpid: gpID,
 }
-// const StickyObj = {
-//     adUnitName: "",
-//     pageName: '',               //Game Name
-//     categoryName: '',           //Publisher Name
-//     placementName: '',
-//     containerID: "",            //Div Id for banner
-//     height: 50,
-//     width: 320,
-//     xc: '12.0',
-//     yc: '3.0',
-//     gpid: gpID,
-// }
+const StickyObj = {
+    adUnitName: "",
+    pageName: 'ParodyStudios_ShogiGame',               //Game Name
+    categoryName: 'google',           //Publisher Name
+    placementName: 'Test_Banner',
+    containerID: "banner-ad",            //Div Id for banner
+    height: 50,
+    width: 320,
+    xc: '12.0',
+    yc: '3.0',
+    gpid: gpID,
+}
 
 const LBBannerObj = {
     adUnitName: "",
@@ -111,6 +111,12 @@ function bannerCallbacks(obj) {
             $(".gameOverDiv").css("margin-top", "0px");
         }
 
+        if (obj.adUnitName === StickyObj.adUnitName) {
+            console.log("Sticky Loaded");
+            $("#div-gpt-ad-1").css("display", "flex")
+            $(".gameOverDiv").css("margin-down", "0px");
+        }
+
     });
 
     obj.adInstance?.registerCallback('onAdLoadFailed', (data) => {
@@ -121,37 +127,30 @@ function bannerCallbacks(obj) {
             $("#div-gpt-ad-1").css("display", "none")
             $(".gameOverDiv").css("margin-top", "100px");
         }
+
+        if (obj.adUnitName === StickyObj.adUnitName) {
+            console.log("Sticky failed");
+            $("#div-gpt-ad-1").css("display", "none")
+            $(".gameOverDiv").css("margin-down", "100px");
+        }
     });
 
     obj.adInstance?.registerCallback('onAdDisplayed', (data) => {
         console.log('onAdDisplayed  CALLBACK', data);
 
+        if (obj.adUnitName === StickyObj.adUnitName) 
+        {
+            console.log("Sticky shown");
+        }
     });
 
 
 }
 
-const BannerStickyObj = {
-    adUnitName: "",
-    pageName: 'PublisherName_GameName',               //Game Name
-    categoryName: 'google',           //Publisher Name
-    placementName: 'Test_Banner',
-    containerID: "div-gpt-ad-2",            //Div Id for banner
-    height: 50,
-    width: 320,
-    xc: '12.0',
-    yc: '3.0',
-    gpid: gpID,
-}
-
 function callForStickyAds()
 {
-
-    console.log("Called after 2 secs of game load");
-
-
     refreshStickyBannerAd(); 
-    StickyBannerInstance=window?.GlanceGamingAdInterface?.showStickyBannerAd(BannerStickyObj, bannerCallbacks);
+    StickyBannerInstance=window?.GlanceGamingAdInterface?.showStickyBannerAd(StickyObj, bannerCallbacks);
 }
 
 // rewarded ad callbacks

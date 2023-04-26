@@ -24,7 +24,7 @@ function refreshStickyBannerAd() {
 			StickyBannerInstance.destroyAd();
 		}
 		
-		StickyBannerInstance =  window.GlanceGamingAdInterface.showStickyBannerAd(BannerStickyObj,bannerCallbacks);
+		StickyBannerInstance =  window.GlanceGamingAdInterface.showStickyBannerAd(StickyObj,bannerCallbacks);
     }, 30000);
 }
 
