@@ -294,4 +294,3 @@ function showGame() {
         $("#div-gpt-ad-1").html("");
     }
 }
-

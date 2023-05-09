@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./stickyBanner.css">
     <script src="Build/Shogi_Webgl.loader.js"></script>
     <script type="text/javascript" src="./ads.js"></script>
+    <script type="text/javascript" src="./customEventsListner.js"></script>
 
     <script>
       var unityInstanceMain = null;
@@ -121,6 +122,10 @@
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
           // Updating GLANCE progress bar over here...
+          if(progress == 1)
+          {
+            sendCustomAnalyticsEvent("game_load", {});
+          }
           progressBar(100 * progress);
         }).then((unityInstance) => {
           unityInstanceMain = unityInstance;
