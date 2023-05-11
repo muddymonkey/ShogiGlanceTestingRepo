@@ -1,5 +1,5 @@
 
-const gameInput = { gameName: 'ShogiGame', publisherName: 'ParodyStudios', surface: "test"};
+const gameInput = { gameName: 'ShogiGame', publisherName: 'ParodyStudios'};
 
 //loading scripts
 $.getScript(
@@ -27,10 +27,10 @@ var isRewardedAdClosedByUser = false
 
 // Objects for different ad format.
 const LPMercObj = {
-    adUnitName: "",
+    adUnitName: "ParodyStudios_ShogiGame_Gameload_Bottom",
     pageName: 'ParodyStudios_ShogiGame',               //Game Name
-    categoryName: 'google',           //Publisher Name
-    placementName: 'Test_Banner',
+    categoryName: 'ParodyStudios',           //Publisher Name
+    placementName: 'Gameload',
     containerID: "div-gpt-ad-2",            //Div Id for banner
     height: 250,
     width: 300,
@@ -39,10 +39,10 @@ const LPMercObj = {
     gpid: gpID,
 }
 const StickyObj = {
-    adUnitName: "",
+    adUnitName: "ParodyStudios_ShogiGame_Ingame_Bottom",
     pageName: 'ParodyStudios_ShogiGame',               //Game Name
-    categoryName: 'google',           //Publisher Name
-    placementName: 'Test_Banner',
+    categoryName: 'ParodyStudios',           //Publisher Name
+    placementName: 'Ingame',
     containerID: "banner-ad",            //Div Id for banner
     height: 50,
     width: 320,
@@ -52,15 +52,39 @@ const StickyObj = {
 }
 
 const LBBannerObj = {
-    adUnitName: "",
-    pageName: '',               //Game Name
-    categoryName: '',           //Publisher Name
+    adUnitName: "ParodyStudios_ShogiGame_Leaderboard_Top",
+    pageName: 'ParodyStudios_ShogiGame',               //Game Name
+    categoryName: 'ParodyStudios',           //Publisher Name
     placementName: 'leaderboard',
     containerID: "div-gpt-ad-1",            //Div Id for banner
     height: 250,
     width: 300,
     xc: '12.0',
     yc: '3.0',
+    gpid: gpID,
+}
+const replayObj = {
+    adUnitName: "ParodyStudios_ShogiGame_FsReplay_Replay",
+    placementName: "FsReplay",
+    pageName: 'ParodyStudios_ShogiGame',
+    categoryName: 'ParodyStudios',
+    containerID: '',
+    height: '',
+    width: '',
+    xc: '',
+    yc: '',
+    gpid: gpID,
+}
+const rewardObj = {
+    adUnitName: "ParodyStudios_ShogiGame_FsRewarded_Reward",
+    placementName: "FsRewarded",
+    pageName: 'ParodyStudios_ShogiGame',
+    categoryName: 'ParodyStudios',
+    containerID: '',
+    height: '',
+    width: '',
+    xc: '',
+    yc: '',
     gpid: gpID,
 }
 
@@ -71,31 +95,6 @@ function successCb() {
 }
 function failCb(reason) { }
 
-
-const replayObj = {
-    adUnitName: "",
-    placementName: "FsReplay",
-    pageName: '',
-    categoryName: '',
-    containerID: '',
-    height: '',
-    width: '',
-    xc: '',
-    yc: '',
-    gpid: gpID,
-}
-const rewardObj = {
-    adUnitName: "",
-    placementName: "Test_Rewarded",
-    pageName: 'ParodyStudios_ShogiGame',
-    categoryName: 'google',
-    containerID: '',
-    height: '',
-    width: '',
-    xc: '',
-    yc: '',
-    gpid: gpID,
-}
 
 //banner ads callbacks 
 function bannerCallbacks(obj) {
@@ -149,8 +148,11 @@ function bannerCallbacks(obj) {
 
 function callForStickyAds()
 {
-    refreshStickyBannerAd(); 
-    StickyBannerInstance=window?.GlanceGamingAdInterface?.showStickyBannerAd(StickyObj, bannerCallbacks);
+    refreshStickyBannerAd();
+    StickyBannerInstance =  window.GlanceGamingAdInterface.showStickyBannerAd(StickyObj,bannerCallbacks);   
+
+    replayInstance = window.GlanceGamingAdInterface.loadRewardedAd(replayObj, rewardedCallbacks);
+    rewardInstance = window.GlanceGamingAdInterface.loadRewardedAd(rewardObj, rewardedCallbacks);
 }
 
 // rewarded ad callbacks
