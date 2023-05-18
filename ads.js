@@ -1,6 +1,5 @@
 
-const gameInput = { gameName: 'ShogiGame', publisherName: 'ParodyStudios'};
-
+const gameInput = { gameName: 'ShogiGame', publisherName: 'ParodyStudios', surface: "test"};
 //loading scripts
 $.getScript(
 
@@ -27,22 +26,22 @@ var isRewardedAdClosedByUser = false
 
 // Objects for different ad format.
 const LPMercObj = {
-    adUnitName: "ParodyStudios_ShogiGame_Gameload_Bottom",
+    adUnitName: "",
     pageName: 'ParodyStudios_ShogiGame',               //Game Name
-    categoryName: 'ParodyStudios',           //Publisher Name
-    placementName: 'Gameload',
+    categoryName: 'google',           //Publisher Name
+    placementName: 'Test_Banner',
     containerID: "div-gpt-ad-2",            //Div Id for banner
     height: 250,
     width: 300,
     xc: '12.0',
     yc: '3.0',
     gpid: gpID,
-}
-const StickyObj = {
-    adUnitName: "ParodyStudios_ShogiGame_Ingame_Bottom",
+ }
+ const StickyObj = {
+    adUnitName: "",
     pageName: 'ParodyStudios_ShogiGame',               //Game Name
-    categoryName: 'ParodyStudios',           //Publisher Name
-    placementName: 'Ingame',
+    categoryName: 'google',           //Publisher Name
+    placementName: 'Test_Banner',
     containerID: "banner-ad",            //Div Id for banner
     height: 50,
     width: 320,
@@ -52,9 +51,9 @@ const StickyObj = {
 }
 
 const LBBannerObj = {
-    adUnitName: "ParodyStudios_ShogiGame_Leaderboard_Top",
-    pageName: 'ParodyStudios_ShogiGame',               //Game Name
-    categoryName: 'ParodyStudios',           //Publisher Name
+    adUnitName: "",
+    pageName: '',               //Game Name
+    categoryName: '',           //Publisher Name
     placementName: 'leaderboard',
     containerID: "div-gpt-ad-1",            //Div Id for banner
     height: 250,
@@ -64,10 +63,10 @@ const LBBannerObj = {
     gpid: gpID,
 }
 const replayObj = {
-    adUnitName: "ParodyStudios_ShogiGame_FsReplay_Replay",
+    adUnitName: "",
     placementName: "FsReplay",
-    pageName: 'ParodyStudios_ShogiGame',
-    categoryName: 'ParodyStudios',
+    pageName: '',
+    categoryName: '',
     containerID: '',
     height: '',
     width: '',
@@ -76,10 +75,10 @@ const replayObj = {
     gpid: gpID,
 }
 const rewardObj = {
-    adUnitName: "ParodyStudios_ShogiGame_FsRewarded_Reward",
-    placementName: "FsRewarded",
+    adUnitName: "",
+    placementName: "Test_Rewarded",
     pageName: 'ParodyStudios_ShogiGame',
-    categoryName: 'ParodyStudios',
+    categoryName: 'google',
     containerID: '',
     height: '',
     width: '',
