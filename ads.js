@@ -1,5 +1,5 @@
 
-const gameInput = { gameName: 'ShogiGame', publisherName: 'ParodyStudios', surface: "test"};
+const gameInput = { gameName: 'ShogiGame', publisherName: 'ParodyStudios'};
 //loading scripts
 $.getScript(
 
