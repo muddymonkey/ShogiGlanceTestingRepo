@@ -26,22 +26,22 @@ var isRewardedAdClosedByUser = false
 
 // Objects for different ad format.
 const LPMercObj = {
-    adUnitName: "",
+    adUnitName: "ParodyStudios_ShogiGame_Gameload_Bottom",
     pageName: 'ParodyStudios_ShogiGame',               //Game Name
-    categoryName: 'google',           //Publisher Name
-    placementName: 'Test_Banner',
+    categoryName: 'ParodyStudios',           //Publisher Name
+    placementName: 'Gameload',
     containerID: "div-gpt-ad-2",            //Div Id for banner
     height: 250,
     width: 300,
     xc: '12.0',
     yc: '3.0',
     gpid: gpID,
- }
- const StickyObj = {
-    adUnitName: "",
+}
+const StickyObj = {
+    adUnitName: "ParodyStudios_ShogiGame_Ingame_Bottom",
     pageName: 'ParodyStudios_ShogiGame',               //Game Name
-    categoryName: 'google',           //Publisher Name
-    placementName: 'Test_Banner',
+    categoryName: 'ParodyStudios',           //Publisher Name
+    placementName: 'Ingame',
     containerID: "banner-ad",            //Div Id for banner
     height: 50,
     width: 320,
@@ -51,9 +51,9 @@ const LPMercObj = {
 }
 
 const LBBannerObj = {
-    adUnitName: "",
-    pageName: '',               //Game Name
-    categoryName: '',           //Publisher Name
+    adUnitName: "ParodyStudios_ShogiGame_Leaderboard_Top",
+    pageName: 'ParodyStudios_ShogiGame',               //Game Name
+    categoryName: 'ParodyStudios',           //Publisher Name
     placementName: 'leaderboard',
     containerID: "div-gpt-ad-1",            //Div Id for banner
     height: 250,
@@ -63,10 +63,10 @@ const LBBannerObj = {
     gpid: gpID,
 }
 const replayObj = {
-    adUnitName: "",
-    placementName: "Test_Rewarded",
-    pageName: '',
-    categoryName: 'google',
+    adUnitName: "ParodyStudios_ShogiGame_FsReplay_Replay",
+    placementName: "FsReplay",
+    pageName: 'ParodyStudios_ShogiGame',
+    categoryName: 'ParodyStudios',
     containerID: '',
     height: '',
     width: '',
@@ -75,10 +75,10 @@ const replayObj = {
     gpid: gpID,
 }
 // const rewardObj = {
-//     adUnitName: "",
-//     placementName: "Test_Rewarded",
+//     adUnitName: "ParodyStudios_ShogiGame_FsRewarded_Reward",
+//     placementName: "FsRewarded",
 //     pageName: 'ParodyStudios_ShogiGame',
-//     categoryName: 'google',
+//     categoryName: 'ParodyStudios',
 //     containerID: '',
 //     height: '',
 //     width: '',
@@ -162,9 +162,9 @@ function rewardedCallbacks(obj) {
         if (obj.adUnitName === replayObj.adUnitName) {
             is_replay_noFill = false
         }
-        if (obj.adUnitName === rewardObj.adUnitName) {
-            is_rewarded_noFill = false
-        }
+        // if (obj.adUnitName === rewardObj.adUnitName) {
+        //     is_rewarded_noFill = false
+        // }
 
         unityInstanceMain.SendMessage("JSToUnityBridge", "ReciveCallBack", "rewardedLoadSuccess");
 
@@ -175,9 +175,9 @@ function rewardedCallbacks(obj) {
         if (obj.adUnitName === replayObj.adUnitName) {
             is_replay_noFill = true
         }
-        if (obj.adUnitName === rewardObj.adUnitName) {
-            is_rewarded_noFill = true
-        }
+        // if (obj.adUnitName === rewardObj.adUnitName) {
+        //     is_rewarded_noFill = true
+        // }
 
         unityInstanceMain.SendMessage("JSToUnityBridge", "ReciveCallBack", "rewardedLoadFailed");
 
@@ -199,9 +199,9 @@ function rewardedCallbacks(obj) {
         unityInstanceMain.SendMessage("JSToUnityBridge", "ReciveCallBack", "rewardedCompleted");
 
 
-        if (obj.adUnitName == rewardObj.adUnitName) {
-            isRewardedAdClosedByUser = true
-        }
+        // if (obj.adUnitName == rewardObj.adUnitName) {
+        //     isRewardedAdClosedByUser = true
+        // }
         runOnAdClosed();
         isRewardGranted = false
         isRewardedAdClosedByUser = false
@@ -215,9 +215,9 @@ function rewardedCallbacks(obj) {
     {
         console.log('onRewardsUnlocked Rewarded CALLBACK', data);
 
-        if (obj.adUnitName === rewardObj.adUnitName) {
-            isRewardGranted = true
-        }
+        // if (obj.adUnitName === rewardObj.adUnitName) {
+        //     isRewardGranted = true
+        // }
 
     });
 
@@ -234,22 +234,6 @@ function runOnAdClosed() {
     
 
      }
-    // else if (_triggerReason === 'reward') {
-
-    //     // If user close ad before reward
-    //     if (!isRewardGranted && isRewardedAdClosedByUser) {
-    //         // call game function for not earning reward (failure case)
-
-    //     } else {
-
-    //         // call game function for earned reward  (success case)
-    //     }
-    //     _triggerReason = ''
-    //     rewardInstance = window.GlanceGamingAdInterface.loadRewardedAd(rewardObj, rewardedCallbacks);
-
-    // }
-
-
 }
 
 // function called on replay button (leaderboard) clicked
@@ -264,21 +248,28 @@ function replayEvent() {
 
 }
 
-// function rewardEvent() {
-//     _triggerReason = 'reward'
-//     if (!is_rewarded_noFill) {
-//         window.GlanceGamingAdInterface.showRewarededAd(rewardInstance);
-//     } else {
-//         runOnAdClosed();
-//     }
-
-// }
-
-function rewardedFunction()
-{
-   // rewardInstance=window.GlanceGamingAdInterface.loadRewardedAd(rewardObj, rewardedCallbacks);
-}
-
+function getCurrentFunctionCaller() {
+    // Create a new Error object
+    const error = new Error();
+  
+    // Extract the call stack from the Error object
+    const stackTrace = error.stack;
+  
+    // Split the call stack into individual lines
+    const stackLines = stackTrace.split('\n');
+  
+    // Get the caller function name from the second line
+    const callerLine = stackLines[2];
+    const callerFunctionName = callerLine.match(/at\s+(.*)\s+\(/)[1];
+  
+    // Return the caller function name
+    return callerFunctionName;
+  }
+  
+  function foo() {
+    const caller = getCurrentFunctionCaller();
+    console.log('Caller:', caller);
+  }
 
 function showGame() {
     if (recUI === 'true') {
