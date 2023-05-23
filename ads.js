@@ -64,20 +64,8 @@ const LBBannerObj = {
 }
 const replayObj = {
     adUnitName: "",
-    placementName: "FsReplay",
-    pageName: '',
-    categoryName: '',
-    containerID: '',
-    height: '',
-    width: '',
-    xc: '',
-    yc: '',
-    gpid: gpID,
-}
-const rewardObj = {
-    adUnitName: "",
     placementName: "Test_Rewarded",
-    pageName: 'ParodyStudios_ShogiGame',
+    pageName: '',
     categoryName: 'google',
     containerID: '',
     height: '',
@@ -86,6 +74,18 @@ const rewardObj = {
     yc: '',
     gpid: gpID,
 }
+// const rewardObj = {
+//     adUnitName: "",
+//     placementName: "Test_Rewarded",
+//     pageName: 'ParodyStudios_ShogiGame',
+//     categoryName: 'google',
+//     containerID: '',
+//     height: '',
+//     width: '',
+//     xc: '',
+//     yc: '',
+//     gpid: gpID,
+// }
 
 function successCb() {
     console.log("set up lib success")
@@ -151,17 +151,11 @@ function callForStickyAds()
     StickyBannerInstance =  window.GlanceGamingAdInterface.showStickyBannerAd(StickyObj,bannerCallbacks);   
 
     replayInstance = window.GlanceGamingAdInterface.loadRewardedAd(replayObj, rewardedCallbacks);
-    rewardInstance = window.GlanceGamingAdInterface.loadRewardedAd(rewardObj, rewardedCallbacks);
+//    rewardInstance = window.GlanceGamingAdInterface.loadRewardedAd(rewardObj, rewardedCallbacks);
 }
 
 // rewarded ad callbacks
 function rewardedCallbacks(obj) {
-
-        // var gameObjectName = "MyGameObject";
-        // var methodName = "MyMethod";
-        // var message = "Hello from JavaScript!";
-
-        // unityInstance.SendMessage(gameObjectName, methodName, message);
         
     obj.adInstance?.registerCallback('onAdLoadSucceed', (data) => {
         console.log('onAdLoadSucceeded Rewarded CALLBACK', data);
@@ -194,6 +188,7 @@ function rewardedCallbacks(obj) {
         console.log('onAdDisplayed Rewarded CALLBACK', data);
 
         unityInstanceMain.SendMessage("JSToUnityBridge", "ReciveCallBack", "rewardedShowSuccess");
+
     });
 
 
@@ -201,26 +196,24 @@ function rewardedCallbacks(obj) {
     obj.adInstance?.registerCallback('onAdClosed', (data) => {
         console.log('onAdClosed Rewarded CALLBACK', data);
 
+        unityInstanceMain.SendMessage("JSToUnityBridge", "ReciveCallBack", "rewardedCompleted");
+
+
         if (obj.adUnitName == rewardObj.adUnitName) {
             isRewardedAdClosedByUser = true
         }
         runOnAdClosed();
         isRewardGranted = false
         isRewardedAdClosedByUser = false
-
-        unityInstanceMain.SendMessage("JSToUnityBridge", "ReciveCallBack", "rewardedClosed");
-
-
     });
 
     obj.adInstance?.registerCallback('onAdClicked', (data) => {
         console.log('onAdClicked Rewarded CALLBACK', data);
     });
 
-    obj.adInstance?.registerCallback('onRewardsUnlocked', (data) => {
+    obj.adInstance?.registerCallback('onRewardsUnlocked', (data) => 
+    {
         console.log('onRewardsUnlocked Rewarded CALLBACK', data);
-
-        unityInstanceMain.SendMessage("JSToUnityBridge", "ReciveCallBack", "rewardedCompleted");
 
         if (obj.adUnitName === rewardObj.adUnitName) {
             isRewardGranted = true
@@ -238,27 +231,30 @@ function runOnAdClosed() {
         showGame();
 
         replayInstance = window.GlanceGamingAdInterface.loadRewardedAd(replayObj, rewardedCallbacks);
+    
 
-    } else if (_triggerReason === 'reward') {
+     }
+    // else if (_triggerReason === 'reward') {
 
-        // If user close ad before reward
-        if (!isRewardGranted && isRewardedAdClosedByUser) {
-            // call game function for not earning reward (failure case)
+    //     // If user close ad before reward
+    //     if (!isRewardGranted && isRewardedAdClosedByUser) {
+    //         // call game function for not earning reward (failure case)
 
-        } else {
+    //     } else {
 
-            // call game function for earned reward  (success case)
-        }
-        _triggerReason = ''
-        rewardInstance = window.GlanceGamingAdInterface.loadRewardedAd(rewardObj, rewardedCallbacks);
+    //         // call game function for earned reward  (success case)
+    //     }
+    //     _triggerReason = ''
+    //     rewardInstance = window.GlanceGamingAdInterface.loadRewardedAd(rewardObj, rewardedCallbacks);
 
-    }
+    // }
 
 
 }
 
 // function called on replay button (leaderboard) clicked
 function replayEvent() {
+    console.log("replay event called");
     _triggerReason = 'replay'
     if (!is_replay_noFill) {
         window.GlanceGamingAdInterface.showRewarededAd(replayInstance);
@@ -268,18 +264,19 @@ function replayEvent() {
 
 }
 
-function rewardEvent() {
-    _triggerReason = 'reward'
-    if (!is_rewarded_noFill) {
-        window.GlanceGamingAdInterface.showRewarededAd(rewardInstance);
-    } else {
-        runOnAdClosed();
-    }
+// function rewardEvent() {
+//     _triggerReason = 'reward'
+//     if (!is_rewarded_noFill) {
+//         window.GlanceGamingAdInterface.showRewarededAd(rewardInstance);
+//     } else {
+//         runOnAdClosed();
+//     }
 
-}
+// }
 
-function rewardedFunction(){
-    rewardInstance=window.GlanceGamingAdInterface.loadRewardedAd(rewardObj, rewardedCallbacks);
+function rewardedFunction()
+{
+   // rewardInstance=window.GlanceGamingAdInterface.loadRewardedAd(rewardObj, rewardedCallbacks);
 }
 
 
